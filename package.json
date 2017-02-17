@@ -1,0 +1,36 @@
+{
+  "name": "slack-mafia-partygame",
+  "version": "0.1.0",
+  "description": "A slack bot that moderates mafia games",
+  "main": "./build/main.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "backpack",
+    "build": "backpack build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "https://github.com/mtmvu/slack-mafia-partygame",
+  "author": "mtmvu",
+  "license": "MIT",
+  "keywords": [
+    "Slack",
+    "slackbot",
+    "node",
+    "mafia",
+    "werewolf",
+    "game"
+  ],
+  "engines": {
+    "node": "6.9.4"
+  },
+  "dependencies": {
+    "async": "^2.1.4",
+    "backpack-core": "0.1.0",
+    "dotenv": "^4.0.0",
+    "lodash": "^4.17.4",
+    "slack-node": "^0.1.8",
+    "slackbots": "^1.0.2",
+    "sqlite3": "^3.1.8"
+  },
+  "devDependencies": {}
+}
