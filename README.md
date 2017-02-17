@@ -1,4 +1,4 @@
-# <img src="docs/img/game_master.png" alt="logo" style="width: 50px;"/> slack-mafia-partygame
+# <img src="docs/img/game_master.png" alt="logo" width="50"/> slack-mafia-partygame
 
 <img src="docs/img/slack.png" alt="screenshot" style="width: 500px;"/>
 
