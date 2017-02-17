@@ -2,7 +2,7 @@
 
 <img src="docs/img/slack.png" alt="screenshot" width="500"/>
 
-<img src="docs/img/framer.png" alt="screenshot" width="500"/>
+<img src="docs/img/framer.png" alt="screenshot" width="700"/>
 
 ## Description
 
