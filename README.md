@@ -1,8 +1,8 @@
 # <img src="docs/img/game_master.png" alt="logo" width="50"/> slack-mafia-partygame
 
-<img src="docs/img/slack.png" alt="screenshot" style="width: 500px;"/>
+<img src="docs/img/slack.png" alt="screenshot" width="500"/>
 
-<img src="docs/img/framer.png" alt="screenshot" style="width: 500px;"/>
+<img src="docs/img/framer.png" alt="screenshot" width="500"/>
 
 ## Description
 
