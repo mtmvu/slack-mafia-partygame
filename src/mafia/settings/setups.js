@@ -6,10 +6,6 @@ const setups = {
       configurations: {
         'Town Protective': 1
       }
-    },
-    {
-      id: 'test',
-      roles: ['Veteran', 'Mafioso', 'Cop', 'Citizen']
     }
   ],
   5: [
