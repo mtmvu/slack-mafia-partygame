@@ -49,12 +49,12 @@ let arsonist = {
       let text
       if (resPoll.maxVote > 0) {
         if (resPoll.targets[0] == str.burn()) {
-          _.forEach(_.filter(player.game.getPlayers({ except: player.name }), { isDoused: false }), target => {
+          _.forEach(_.filter(player.game.getPlayers({ except: player.name }), { isDoused: true }), target => {
             player.game.gameEmitter.emit('nightEvent', {
               type: 'kill',
               player: player.name,
               target: target.name,
-              typeKill: 'arsonist'
+              killType: 'arsonist'
             })
             player.addCrime(misc.crimes.arson)
           })

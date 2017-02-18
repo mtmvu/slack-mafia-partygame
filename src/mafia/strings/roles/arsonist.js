@@ -18,7 +18,7 @@ export default class ArsonistStrings extends MafiaGameStrings {
               }
             case 'particle':
               return {
-                en: 'a',
+                en: 'an',
                 fr: 'un'
               }
             case 'summary':

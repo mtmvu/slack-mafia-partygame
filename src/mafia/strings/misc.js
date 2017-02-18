@@ -6,7 +6,7 @@ const miscStrings = {
       goalSurvivor: 'Survive to the end of the game, regardless of whether or not the Town or Mafia win.',
       goalJester: 'Die by being lynched during the day.',
       goalSerialKiller: 'Be the last person left alive.',
-      goalArsonist: '	Be the last person left alive'
+      goalArsonist: 'Be the last person left alive'
     },
 
     investigation: {
