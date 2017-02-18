@@ -89,7 +89,6 @@ In Slack: **direct message the bot** with theses commands:
 ## Known Bugs
 
 - multiple `!mafia newgame` will create a new game instance without deleting the previous ones. The only way to reset roles is to quit the app and relaunch it.
-- Last will calls are not synchronous
 - TypeError when game ends
 
 ## Limitations
