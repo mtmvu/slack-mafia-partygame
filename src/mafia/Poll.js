@@ -18,20 +18,6 @@ export default class Poll {
     this.showResult = showResult
   }
 
-  // start() {
-  //   this.game.postMessage(this.chan, this.text)
-  //     .then(() => {
-  //       // display choices to the channel
-  //       _.forEach(this.choices, choice => {
-  //         this.game.postMessage(this.chan, '• ' + choice.name)
-  //           .then((response) => {
-  //             // keep a reference of each choice in this.poll
-  //             this.poll.push(response.response)
-  //           })
-  //       })
-  //     })
-  // }
-
   start() {
     this.game.postMessage(this.chan, this.text)
       .then(() => {
