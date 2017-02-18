@@ -196,7 +196,7 @@ export default class Game {
   initRoles() {
     const roles = []
     const n = this.players.length
-    if (n < 3) {
+    if (n < 4) {
       this.end()
     }
     let setup

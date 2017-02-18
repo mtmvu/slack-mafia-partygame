@@ -106,7 +106,7 @@ let main = {
                             .then(dataUsers => {
                               var players = []
                               _.forEach(dataUsers.members, member => {
-                                if (!member.is_bot && !member.is_admin && member.name != 'slackbot') {
+                                if (!member.is_bot && member.name != 'slackbot' && member.name != process.env.MAFIA_API_NAME) {
                                   if (_.indexOf(data.members, member.id))
                                     players.push({ id: member.id, name: member.name })
                                 }
