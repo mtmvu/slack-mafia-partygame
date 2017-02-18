@@ -36,7 +36,7 @@ export default class Player {
           .then(() => resolve(true))
       } else {
         if (this.roleBlocked) {
-          this.game.postMessage(player.id, misc.roleBlocked)
+          this.game.postMessage(this.id, misc.roleBlocked)
             .then(() => resolve(true))
         } else {
           this.role.resolveNightAbility(this, events)
