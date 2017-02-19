@@ -7,7 +7,7 @@ import _ from 'lodash'
 import async from 'async'
 
 const str = new NightCycleStrings(LANG)
-const { crimes, roleBlocked } = miscStrings[LANG]
+const { crimes } = miscStrings[LANG]
 
 export default class NightCycle {
   constructor(game) {
