@@ -508,20 +508,25 @@ export default class Game {
     })
   }
 
-  // Set the player (victim) isAlive attribute to false then post a message to both the town channel and the victim's direct message
+  // Set the player (victim) isAlive attribute to false then post a message to
+  // both the town channel and the victim's direct message
   // Also display his last will
   // If the player was mafia, kick him from mafia channel
-  newVictim(victim, killType) {
+  newVictim(victim, killTypes) {
     return new Promise((resolve, reject) => {
       if (victim.isSanitized) {
         victim.role.desc.name = misc.cleaned
         victim.lastWill = ''
       }
+      if (killTypes instanceof String) {
+        killTypes = [killTypes]
+      }
+      const textKillTypes = _.join(_.map(killTypes, x => str.kills(x)), '\n ')
       const text = str.victim('announce', {
         name: victim.name,
         role: victim.role.desc.name,
-        killType: str.kills(killType),
-        lynch: killType == 'lynch' ? str.isLynch() : ''
+        killType: textKillTypes,
+        lynch: (_.indexOf(killTypes, 'lynch') > -1) ? str.isLynch() : ''
       })
       victim.isAlive = false
       this.postMessage(this.getTownRoom(), text)

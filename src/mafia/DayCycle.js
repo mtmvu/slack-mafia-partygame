@@ -170,7 +170,7 @@ export default class DayCycle {
         this.game.postMessage(chan, str.endTrial('lynch', suspect.name))
           .then(() => {
             this.kills.push({ type: 'kill', player: 'Town', target: suspect.name, killType: 'lynch' })
-            this.game.newVictim(suspect, 'lynch')
+            this.game.newVictim(suspect, ['lynch'])
               .then(() => this.end())
           })
 
@@ -203,16 +203,20 @@ export default class DayCycle {
   // Show all players dead during the previous night
   makeAnnouncements() {
     return new Promise((resolve, reject) => {
-      const nKills = this.lastNightKills.length < 14 ? this.lastNightKills.length : 14
+      const kills = _.groupBy(this.lastNightKills, 'target')
+      const nKills = _.keys(kills)
+        .length < 14 ? _.keys(kills)
+        .length : 14
       const chan = this.game.getTownRoom()
       this.game.postMessage(chan, str.announcements(nKills))
         .then(() => sleep(2))
         .then(() => {
-          async.forEachSeries(this.lastNightKills, (event, callback) => {
+          async.forEachSeries(_.keys(kills), (key, callback) => {
             const victim = _.find(this.game.players, {
-              name: event.target
+              name: key
             })
-            this.game.newVictim(victim, event.killType)
+            const killTypes = _.map(kills[key], 'killType')
+            this.game.newVictim(victim, killTypes)
               .then(() => sleep(2))
               .then(() => callback())
           }, () => resolve(true))
