@@ -40,6 +40,7 @@ export default class Game {
   init() {
     // give a role to each player
     this.setPlayers()
+    this.resetImmunity()
     // display game distribution
     const chan = this.getTownRoom()
     const distribution = _.countBy(this.rolesDistribution, 'affiliation')
@@ -463,9 +464,10 @@ export default class Game {
 
   resetImmunity() {
     _.forEach(this.getPlayers(), player => {
-      player.hasNightImmunity = player.role.hasNightImmunity || false
-      player.ignoreNightImmunity = player.role.ignoreNightImmunity || false
+      player.hasNightImmunity = player.role.params.hasNightImmunity || false
+      player.ignoreNightImmunity = player.role.params.ignoreNightImmunity || false
     })
+  }
 
   resetPoll() {
     _.forEach(this.getPlayers(), player => {
