@@ -40,8 +40,6 @@ let bodyguard = {
       .then(() => player.visit())
   },
 
-
-
   resolveNightAbility(player, events) {
     return new Promise((resolve, reject) => {
       const resPoll = player.poll.getMaxVoted()
