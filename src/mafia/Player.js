@@ -52,6 +52,14 @@ export default class Player {
     })
   }
 
+  cancelVisit() {
+    _.last(this.game.gameState.cycles)
+      .events = _.filter(_.last(this.game.gameState.cycles)
+        .events, e => {
+          return ((e.type != 'visit') || ((e.type == 'visit') && (e.player != this.name)))
+        })
+  }
+
   addCrime(crime) {
     if (_.indexOf(this.crimes, crime) == -1) {
       this.crimes.push(crime)

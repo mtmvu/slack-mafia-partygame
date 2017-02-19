@@ -51,21 +51,18 @@ let consort = {
           case 'Consort':
             break
           case 'SerialKiller':
-            _.last(player.game.gameState.cycles)
-              .events = _.filter(_.last(player.game.gameState.cycles)
-                .events, e => {
-                  return ((e.type != 'visit') || ((e.type == 'visit') && (e.player != target.name)))
-                })
             player.game.gameEmitter.emit('nightEvent', {
               type: 'kill',
               player: target.name,
-              target: target.name,
+              target: player.name,
               killType: 'serialkiller'
             })
             target.roleBlocked = true
+            target.cancelVisit()
             player.addCrime(misc.crimes.disturbingThePeace)
           default:
             target.roleBlocked = true
+            target.cancelVisit()
             player.addCrime(misc.crimes.disturbingThePeace)
         }
         text = str.resolveNightAbility('block', target.name)
