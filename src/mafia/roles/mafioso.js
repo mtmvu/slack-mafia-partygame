@@ -1,6 +1,7 @@
 import { LANG } from '../settings/gameSettings'
 import MafiosoStrings from '../strings/roles/mafioso'
 import miscStrings from '../strings/misc'
+import _ from 'lodash'
 
 const str = new MafiosoStrings(LANG)
 const misc = miscStrings[LANG]
@@ -29,8 +30,18 @@ let mafioso = {
 
   },
 
-  resolveNightAbility() {
+  resolveNightAbility(player) {
     return new Promise((resolve, reject) => {
+      if (player.poll) {
+        const resPoll = player.poll.getMaxVoted()
+        const target = _.find(player.game.players, { name: resPoll.targets[0] })
+        player.game.gameEmitter.emit('nightEvent', {
+          type: 'kill',
+          player: player.name,
+          target: target.name,
+          killType: 'mafia'
+        })
+      }
       resolve(true)
     })
   },

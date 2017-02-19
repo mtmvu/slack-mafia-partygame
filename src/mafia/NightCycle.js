@@ -7,7 +7,7 @@ import _ from 'lodash'
 import async from 'async'
 
 const str = new NightCycleStrings(LANG)
-const { crimes } = miscStrings[LANG]
+const { crimes, roleBlocked } = miscStrings[LANG]
 
 export default class NightCycle {
   constructor(game) {
@@ -94,7 +94,7 @@ export default class NightCycle {
 
   resolveKillings() {
     return new Promise((resolve, reject) => {
-      const killings = ['Arsonist', 'SerialKiller', 'Vigilante']
+      const killings = ['Arsonist', 'SerialKiller', 'Vigilante', 'Mafioso', 'Godfather']
       async.forEach(this.game.getPlayers(), (player, callback) => {
         if (_.indexOf(killings, player.role.name) > -1) {
           player.resolveNightAbility()
@@ -218,29 +218,22 @@ export default class NightCycle {
   endMafiaPoll(poll) {
     const chan = this.game.getMafiaRoom()
     const resPoll = poll.getMaxVoted()
-    let text = ''
+    let text
     if (resPoll.maxVote > 0) {
-      // if equality take a random
-      let target = _.sample(resPoll.targets)
-      target = _.find(this.game.players, { name: target })
       const killers = this.game.getPlayers({ filters: { affiliation: 'Mafia', category: 'Mafia Killing' } })
       if (killers.length == 0) {
         text = str.endMafia('noKiller')
       } else {
         const killer = _.sample(killers)
+        const target = _.find(this.game.players, { name: resPoll.targets[0] })
         killer.addCrime(crimes.trespassing)
+        killer.poll = poll
         this.game.gameEmitter.emit('nightEvent', {
           type: 'visit',
           player: killer.name,
           target: target.name
         })
         text = str.endMafia('kill', { killer: killer.name, target: target.name })
-        this.game.gameEmitter.emit('nightEvent', {
-          type: 'kill',
-          player: killer.name,
-          target: target.name,
-          killType: 'mafia'
-        })
       }
     } else {
       text = str.endMafia('noKill')
