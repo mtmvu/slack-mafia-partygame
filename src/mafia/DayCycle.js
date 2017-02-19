@@ -37,6 +37,7 @@ export default class DayCycle {
     const chan = this.game.getTownRoom()
     this.game.postMessage(chan, str.start('start'))
       .then(() => {
+        this.game.resetPoll()
         this.game.resetImmunity()
         this.game.resetProtections()
         this.game.resetRoleBlock()

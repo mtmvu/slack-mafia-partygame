@@ -467,6 +467,10 @@ export default class Game {
       player.ignoreNightImmunity = player.role.ignoreNightImmunity || false
     })
 
+  resetPoll() {
+    _.forEach(this.getPlayers(), player => {
+      player.poll = null
+    })
   }
 
   // Invite player to the mafia channel and alert the channeI

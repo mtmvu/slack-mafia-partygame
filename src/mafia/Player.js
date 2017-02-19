@@ -32,7 +32,6 @@ export default class Player {
     return new Promise((resolve, reject) => {
       if (this.role.immuneToRoleBlock) {
         this.role.resolveNightAbility(this, events)
-          .then(() => this.poll = null)
           .then(() => resolve(true))
       } else {
         if (this.roleBlocked) {
@@ -40,7 +39,6 @@ export default class Player {
             .then(() => resolve(true))
         } else {
           this.role.resolveNightAbility(this, events)
-            .then(() => this.poll = null)
             .then(() => resolve(true))
         }
       }
