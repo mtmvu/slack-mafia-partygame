@@ -206,6 +206,7 @@ export default class DayCycle {
       const nKills = this.lastNightKills.length < 14 ? this.lastNightKills.length : 14
       const chan = this.game.getTownRoom()
       this.game.postMessage(chan, str.announcements(nKills))
+        .then(() => sleep(2))
         .then(() => {
           async.forEachSeries(this.lastNightKills, (event, callback) => {
             const victim = _.find(this.game.players, {
