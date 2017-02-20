@@ -157,7 +157,7 @@ export default class DayCycle {
               this.game.postMessage(chan, str.endTrial('die'))
                 .then(() => {
                   this.kills.push({ type: 'kill', player: 'Town', target: suspect.name, killType: 'lynch' })
-                  this.game.newVictim(suspect, 'lynch')
+                  this.game.newVictim(suspect, ['lynch'])
                     .then(() => this.end())
                 })
             } else {
