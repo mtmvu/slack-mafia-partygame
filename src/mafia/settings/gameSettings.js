@@ -11,13 +11,13 @@ const gameSettings = {
   DATABASE_TABLE: 'normal',
 
   timers: {
-    DAY_DEBATE: 30,
-    DAY_DEBATE_POLL: 20,
-    DAY_TRIAL: 15,
-    DAY_TRIAL_POLL: 15,
+    DAY_DEBATE: 60,
+    DAY_DEBATE_POLL: 40,
+    DAY_TRIAL: 30,
+    DAY_TRIAL_POLL: 30,
 
-    MAFIA_LYNCH: 20,
-    NIGHT_ACTIVITY: 20
+    MAFIA_LYNCH: 30,
+    NIGHT_ACTIVITY: 30
   }
 
 }
