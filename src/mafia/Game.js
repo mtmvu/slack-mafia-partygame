@@ -529,6 +529,9 @@ export default class Game {
         lynch: (_.indexOf(killTypes, 'lynch') > -1) ? str.isLynch() : ''
       })
       victim.isAlive = false
+      if(victim.role.name == 'Jester' && (_.indexOf(killTypes, 'lynch') > -1)){
+        victim.score += 50
+      }
       this.postMessage(this.getTownRoom(), text)
         .then(() => victim.showLastWill(this.getTownRoom()))
         .then(() => this.postMessage(victim.id, str.victim('info')))
