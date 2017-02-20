@@ -152,7 +152,7 @@ export default class Game {
           channel: data.channel,
           ts: data.ts
         }, () => {
-          this.postMessage(data.user, text)
+          this.postMessage(data.user, str.mute('muted'))
         })
       }
     }
