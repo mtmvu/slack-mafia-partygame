@@ -28,6 +28,7 @@
     "backpack-core": "0.1.0",
     "dotenv": "^4.0.0",
     "lodash": "^4.17.4",
+    "request": "^2.79.0",
     "slack-node": "^0.1.8",
     "slackbots": "^1.0.2",
     "sqlite3": "^3.1.8"

@@ -70,11 +70,14 @@ let main = {
 
     bot.on('start', () => {
       const botID = bot.self.id
+      webApi.botID = botID
+      webApi.botIM = _.find(bot.ims, { user: botID })
+        .id
 
       bot.on('message', data => {
         if (data.type == 'message') {
-          if (data.text){
-            if(data.text.slice(0,6) == '!mafia'){
+          if (data.text) {
+            if (data.text.slice(0, 6) == '!mafia') {
 
               const command = _.lowerCase(data.text.slice(7))
 
