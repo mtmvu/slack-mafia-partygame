@@ -10,6 +10,8 @@ import NightCycle from './NightCycle'
 import DayCycle from './DayCycle'
 import Leaderboard from './Leaderboard'
 import { sleep } from './utils'
+import request from 'request'
+import fs from 'fs'
 
 const str = new GameStrings(LANG)
 const misc = miscStrings[LANG]
@@ -394,7 +396,9 @@ export default class Game {
     this.postMessage(chan, textEnd)
       .then(() => sleep(2))
       .then(() => this.postMessage(chan, textWin))
+      .then(() => this.downloadLeaderboard())
       .then(() => this.scorer(winners))
+      .then(() => this.uploadLeaderboard())
       .then(() => this.end())
   }
 
@@ -437,6 +441,45 @@ export default class Game {
     })
   }
 
+  downloadLeaderboard() {
+    return new Promise((resolve, reject) => {
+      this.webApi.api('files.list', { channel: this.webApi.botIM }, (err, response) => {
+        if (response.ok) {
+          let leaderboardFile = _.find(response.files, { name: 'leaderboard.db' })
+          if (leaderboardFile) {
+            const leaderboardURL = leaderboardFile.url_private_download
+            const leaderboardFileId = leaderboardFile.id
+            const options = {
+              url: leaderboardURL,
+              headers: {
+                'Authorization': 'Bearer ' + process.env.MAFIA_API_TOKEN
+              }
+            }
+            request.get(options)
+              .pipe(fs.createWriteStream('./leaderboard.db'))
+              .on('finish', () => this.webApi.api('files.delete', { file: leaderboardFileId },
+                () => resolve(true)))
+          } else {
+            resolve(true)
+          }
+        } else {
+          resolve(true)
+        }
+      })
+    })
+  }
+
+  uploadLeaderboard() {
+    return new Promise((resolve, reject) => {
+      const data = {
+        file: fs.createReadStream('./leaderboard.db'),
+        filename: 'leaderboard.db',
+        title: 'leaderboard.db',
+        channels: this.webApi.botIM
+      }
+      this.webApi.api('files.upload', data, () => resolve(true))
+    })
+  }
 
   resetProtections() {
     _.forEach(this.getPlayers(), player => {
