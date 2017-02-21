@@ -61,6 +61,9 @@ let main = {
     }
 
     function initializer(botID) {
+      webApi.botID = botID
+      webApi.botIM = _.find(bot.ims, { user: botID })
+        .id
       initChannels(botID)
       initGroups(botID)
       game = null
@@ -70,9 +73,6 @@ let main = {
 
     bot.on('start', () => {
       const botID = bot.self.id
-      webApi.botID = botID
-      webApi.botIM = _.find(bot.ims, { user: botID })
-        .id
 
       bot.on('message', data => {
         if (data.type == 'message' && data.text) {
