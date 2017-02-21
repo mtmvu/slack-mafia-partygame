@@ -29,7 +29,7 @@ let survivor = {
 
   },
 
-  activateNightAbility() {
+  activateNightAbility(player) {
     if (player.role.params.bulletproofVest > 0) {
       const chan = player.id
       const text = str.activateNightAbility()
@@ -51,7 +51,7 @@ let survivor = {
 
   },
 
-  resolveNightAbility() {
+  resolveNightAbility(player) {
     return new Promise((resolve, reject) => {
       if (player.poll) {
         const resPoll = player.poll.getMaxVoted()
