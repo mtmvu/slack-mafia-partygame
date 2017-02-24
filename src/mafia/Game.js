@@ -416,12 +416,21 @@ export default class Game {
         player.score += 5
         // Mafia or town victory
         if (player.role.affiliation == winners) {
-          player.score += 50
+          switch (winners) {
+            case 'Town':
+              player.score += 30
+              break
+            case 'Mafia':
+              player.score += 50
+              break
+            default:
+              player.score += 0
+          }
         }
         // Solo role
         else if (player.role.name == winners) {
           if (player.isAlive) {
-            player.score += 70
+            player.score += 80
           }
         }
         if (player.isAlive) {
