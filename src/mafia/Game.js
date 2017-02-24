@@ -61,9 +61,9 @@ export default class Game {
       this.newMafiaRecruit(player)
     })
     // listen to new message for mute
-    this.gameEmitter.on('newMessage', data => this.mutePlayers(data))
+    this.gameEmitter.on('message', data => this.mutePlayers(data))
     // listen to commands
-    this.gameEmitter.on('newMessage', data => this.commands(data))
+    this.gameEmitter.on('message', data => this.commands(data))
     // listen to 'newCycle' to start new day/night cycle
     this.gameEmitter.on('newCycle', (cycle, events) => {
       if (cycle == 'night') {
