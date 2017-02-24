@@ -50,7 +50,7 @@ export default class Poll {
           // removing the bullet points with slice
           this.pollResults[(p.message.text)
             .slice(2)] = []
-          this.game.webApi.api('reactions.get', {
+          this.game.slackApi.api('reactions.get', {
             channel: p.channel,
             timestamp: p.ts
           }, (err, response) => {

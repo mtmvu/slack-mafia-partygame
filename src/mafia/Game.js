@@ -17,9 +17,9 @@ const str = new GameStrings(LANG)
 const misc = miscStrings[LANG]
 
 export default class Game {
-  constructor(gameEmitter, webApi, players, channels) {
+  constructor(gameEmitter, slackApi, players, channels) {
     this.gameEmitter = gameEmitter
-    this.webApi = webApi
+    this.slackApi = slackApi
     this.players = players
     this.channels = channels
     this.rolesDistribution = this.initRoles()
@@ -54,7 +54,7 @@ export default class Game {
     this.postMessage(chan, text)
       .then(() => {
         text = nTown + ' Town vs ' + nMafia + ' Mafia vs ' + nNeutral + ' Neutral'
-        this.webApi.api('channels.setTopic', { channel: chan, topic: text })
+        this.slackApi.api('channels.setTopic', { channel: chan, topic: text })
       })
     // invite mafia players in the mafia room
     _.forEach(this.getPlayers({ filters: { affiliation: 'Mafia' } }), player => {
@@ -119,7 +119,7 @@ export default class Game {
     const chan = this.getTownRoom()
     if (_.last(this.gameState.cycles) instanceof NightCycle) {
       if (data.channel == chan) {
-        this.webApi.api('chat.delete', {
+        this.slackApi.api('chat.delete', {
           channel: chan,
           ts: data.ts
         }, () => {
@@ -134,7 +134,7 @@ export default class Game {
     if (_.find(this.getPlayers({ alive: false }), {
         id: data.user
       })) {
-      this.webApi.api('chat.delete', {
+      this.slackApi.api('chat.delete', {
         channel: data.channel,
         ts: data.ts
       }, () => {
@@ -150,7 +150,7 @@ export default class Game {
       if (_.find(this.gameState.mutedPlayers, {
           id: data.user
         })) {
-        this.webApi.api('chat.delete', {
+        this.slackApi.api('chat.delete', {
           channel: data.channel,
           ts: data.ts
         }, () => {
@@ -443,7 +443,7 @@ export default class Game {
 
   downloadLeaderboard() {
     return new Promise((resolve, reject) => {
-      this.webApi.api('files.list', { channel: this.webApi.botIM }, (err, response) => {
+      this.slackApi.api('files.list', { channel: this.slackApi.botIM }, (err, response) => {
         if (response.ok) {
           let leaderboardFile = _.find(response.files, { name: 'leaderboard.db' })
           if (leaderboardFile) {
@@ -457,7 +457,7 @@ export default class Game {
             }
             request.get(options)
               .pipe(fs.createWriteStream('./leaderboard.db'))
-              .on('finish', () => this.webApi.api('files.delete', { file: leaderboardFileId },
+              .on('finish', () => this.slackApi.api('files.delete', { file: leaderboardFileId },
                 () => resolve(true)))
           } else {
             resolve(true)
@@ -475,9 +475,9 @@ export default class Game {
         file: fs.createReadStream('./leaderboard.db'),
         filename: 'leaderboard.db',
         title: 'leaderboard.db',
-        channels: this.webApi.botIM
+        channels: this.slackApi.botIM
       }
-      this.webApi.api('files.upload', data, () => resolve(true))
+      this.slackApi.api('files.upload', data, () => resolve(true))
     })
   }
 
@@ -521,7 +521,7 @@ export default class Game {
   // Invite player to the mafia channel and alert the channeI
   newMafiaRecruit(player) {
     const chan = this.getMafiaRoom()
-    this.webApi.api('groups.invite', {
+    this.slackApi.api('groups.invite', {
       channel: chan,
       user: player.id
     }, () => {
@@ -572,13 +572,13 @@ export default class Game {
         lynch: (_.indexOf(killTypes, 'lynch') > -1) ? str.isLynch() : ''
       })
       victim.isAlive = false
-      if(victim.role.name == 'Jester' && (_.indexOf(killTypes, 'lynch') > -1)){
+      if (victim.role.name == 'Jester' && (_.indexOf(killTypes, 'lynch') > -1)) {
         victim.score += 50
       }
       this.postMessage(this.getTownRoom(), text)
         .then(() => victim.showLastWill(this.getTownRoom()))
         .then(() => this.postMessage(victim.id, str.victim('info')))
-        .then(() => this.webApi.api('groups.kick', { channel: this.getMafiaRoom(), user: victim.id },
+        .then(() => this.slackApi.api('groups.kick', { channel: this.getMafiaRoom(), user: victim.id },
           () => resolve(true)))
     })
   }
@@ -587,7 +587,7 @@ export default class Game {
   // Post message (support promises)
   postMessage(channel, text, as_user = true, username = '') {
     return new Promise((resolve, reject) => {
-      this.webApi.api('chat.postMessage', {
+      this.slackApi.api('chat.postMessage', {
         channel: channel,
         text: text,
         as_user: as_user,
