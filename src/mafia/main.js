@@ -103,7 +103,7 @@ export default class MafiaGameMaster {
     return new Promise((resolve, reject) => {
       async.forEach(group.members, (member, callback) => {
         if (member != this.slackApi.botID) {
-          this.slackApi.api('groups.kick', { channel: channel.id, user: member }, () => callback())
+          this.slackApi.api('groups.kick', { channel: group.id, user: member }, () => callback())
         } else {
           callback()
         }
