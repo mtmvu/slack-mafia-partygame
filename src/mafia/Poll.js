@@ -7,7 +7,7 @@ import _ from 'lodash'
 const str = new PollStrings(LANG)
 
 export default class Poll {
-  constructor(game, chan, text, choices, showResult = false) {
+  constructor(game, chan, text, choices, showResult = false, ignoreId = false) {
     this.game = game
     this.chan = chan
     this.text = text
@@ -16,6 +16,7 @@ export default class Poll {
     this.pollResults = {}
     this.validatedPollResults = {}
     this.showResult = showResult
+    this.ignoreId = ignoreId
   }
 
   start() {
@@ -77,6 +78,10 @@ export default class Poll {
     })
     // get unique voters from the poll
     var voters = _.uniq(_.flattenDeep(_.values(this.pollResults)))
+    // remove vote from ignore players
+    if (this.ignoreId) {
+      _.remove(voters, v => v == this.ignoreId)
+    }
     _.forEach(voters, v => {
       // check if players is alive
       if (_.find(this.game.getPlayers(), { id: v })) {

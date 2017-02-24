@@ -129,7 +129,7 @@ export default class DayCycle {
       {
         name: misc.no
       }]
-    const poll = new Poll(this.game, chan, text, choices, true)
+    const poll = new Poll(this.game, chan, text, choices, true, playerId)
     poll.start()
     sleep(DAY_TRIAL_POLL)
       .then(() => poll.end())
