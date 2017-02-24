@@ -4,8 +4,6 @@ import Game from './Game'
 import { GROUPS, CHANNELS } from './settings/gameSettings'
 import _ from 'lodash'
 import { EventEmitter } from 'events'
-import request from 'request'
-import fs from 'fs'
 import async from 'async'
 
 
