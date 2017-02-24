@@ -608,12 +608,14 @@ export default class Game {
   // NB after unmute, a player can still be muted if all of his references are still in the array
   // that's why i use  _.pullAt and not _.filter
   unmute(players) {
+    const indexes = []
     _.forEach(players, p => {
       let index = _.findIndex(this.gameState.mutedPlayers, { id: p.id })
       if (index) {
-        _.pullAt(this.gameState.mutedPlayers, index)
+        indexes.push(index)
       }
     })
+    _.pullAt(this.gameState.mutedPlayers, indexes)
   }
 
 }
