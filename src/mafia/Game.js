@@ -615,10 +615,11 @@ export default class Game {
   unmute(players) {
     const indexes = []
     _.forEach(players, p => {
-      let index = _.findIndex(this.gameState.mutedPlayers, { id: p.id })
-      if (index) {
-        indexes.push(index)
-      }
+      _.forEach(this.gameState.mutedPlayers, (muted, index) => {
+        if (muted.id == p.id) {
+          indexes.push(index)
+        }
+      })
     })
     _.pullAt(this.gameState.mutedPlayers, indexes)
   }
