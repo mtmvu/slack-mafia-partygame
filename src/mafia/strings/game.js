@@ -52,6 +52,13 @@ export default class GameStrings extends MafiaGameStrings {
     ))
   }
 
+  noSetup(nPlayers) {
+    return super.toString({
+      en: 'Cannot find a setup for ' + nPlayers + ' players. Please check the setups.js file ',
+      fr: 'Impossible de trouver une Configuration pour ' + nPlayers + 'joueurs. Veuillez vérifier le fichier setups.js.'
+    })
+  }
+
   mute(category) {
     return (super.toString(
       (

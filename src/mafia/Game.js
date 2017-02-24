@@ -214,6 +214,11 @@ export default class Game {
       }
     }
 
+    if (!setup) {
+      this.postMessage(this.getTownRoom(), str.noSetup(n))
+        .then(() => this.end())
+    }
+
     _.forEach(setup.roles, role => {
       roles.push(new Role(_.find(arrayRoles, { name: role })))
     })
