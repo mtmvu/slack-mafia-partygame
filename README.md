@@ -6,7 +6,7 @@
 
 ## Description
 
-This is a Slack-based app that acts as a game master for mafia (best known as werewolf) written in Node.js. You can find more informations on the game (rules, mechanics, roles ...) in the repo's wiki.
+This is a Slack-based app that acts as a game master for mafia (best known as werewolf) written in Node.js. You can find more informations on the game (rules, mechanics, roles ...) in the [repo's wiki](https://github.com/mtmvu/slack-mafia-partygame/wiki).
 
 
 ### Tips
@@ -19,7 +19,7 @@ This is a Slack-based app that acts as a game master for mafia (best known as we
 - 3 factions: Town, Mafia, Neutral
 - 20 roles
 - Trial cycle
-- Local leaderboard
+- Online leaderboard (hosted on Slack)
 - English and French supported (you can easily add other languages)
 - Text-only: look busy at work while playing mafia
 - Playable on your smartphone (but more challenging)
@@ -74,6 +74,7 @@ In Slack: **direct message the bot** with theses commands:
 !mafia newgame # create game channels or kick everyone in them
 !mafia setroles # instantiate game with players in the public town channel
 !mafia startgame # start game
+# The following commands are not implemented yet
 !mafia force-end <password> # delete ongoing game
 !mafia leaderboard # display leaderboard
 !mafia leaderboard-reset <password> # reset all scores
