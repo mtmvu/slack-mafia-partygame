@@ -1,6 +1,6 @@
 {
   "name": "slack-mafia-partygame",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "A slack bot that moderates mafia games",
   "main": "./build/main.js",
   "scripts": {
