@@ -284,7 +284,7 @@ export default class Game {
   // Getter for town-room id
   getTownRoom() {
     return (_.find(this.channels, {
-        team: 'town-room'
+        category: 'town-room'
       })
       .id)
   }
@@ -292,7 +292,7 @@ export default class Game {
   // Getter for mafia room id
   getMafiaRoom() {
     return (_.find(this.channels, {
-        team: 'mafia-room'
+        category: 'mafia-room'
       })
       .id)
   }

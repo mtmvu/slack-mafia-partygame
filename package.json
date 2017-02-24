@@ -5,6 +5,7 @@
   "main": "./build/main.js",
   "scripts": {
     "start": "node .",
+    "startdev": "MAFIA_ENV=DEBUG node .",
     "dev": "backpack",
     "build": "backpack build",
     "test": "echo \"Error: no test specified\" && exit 1"

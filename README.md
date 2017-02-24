@@ -58,10 +58,10 @@ For development : `npm run dev`
 To start a new game, direct message (dm) the bot with the following commands:
 
 ```bash
-!mafia init
-# then players must join the town channel
 !mafia newgame
-!mafia start
+# then players must join the town channel
+!mafia setroles
+!mafia startgame
 ```
 
 ### Editing settings
@@ -71,9 +71,9 @@ You can edit settings and setups in the `/src/mafia/settings/` directory
 In Slack: **direct message the bot** with theses commands:
 ### General commands
 ```bash
-!mafia init # create game channels or kick everyone in them
-!mafia newgame # instantiate game with players in the public town channel
-!mafia start # start game
+!mafia newgame # create game channels or kick everyone in them
+!mafia setroles # instantiate game with players in the public town channel
+!mafia startgame # start game
 !mafia force-end <password> # delete ongoing game
 !mafia leaderboard # display leaderboard
 !mafia leaderboard-reset <password> # reset all scores
